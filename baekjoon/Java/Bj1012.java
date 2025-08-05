@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Bj1012 {
+public class bj1012 {
     static int[][] field;
     static boolean[][] visited;
     static int M, N, K;
