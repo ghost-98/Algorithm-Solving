@@ -1,34 +1,33 @@
 import java.util.Scanner;
 
-// 조합 (시간 복잡도)
-// n이 커서 비트 마스킹 불가
-
-public class bj2407 {
+// 비내림차순 조합
+public class bj15652 {
     static int[] numArr;
-    static boolean[] visited;
     static int n, m;
-    static long ret=0;
+    static StringBuilder sb;
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
+        sb = new StringBuilder();
 
         n = sc.nextInt();
         m = sc.nextInt();
         
-        visited = new boolean[n];
         numArr = new int[m];
-
         comb(0, 1);
-        System.out.print(ret);
+
+        System.out.print(sb);
     }
 
     static void comb(int depth, int start){
         if(depth == m){
-            ret++;
+            for(int i=0; i<m; i++) sb.append(numArr[i]).append(" ");
+            sb.append("\n");
             return;
         }
-
-        for(int i=start; i<=n-(m-depth)+1; i++){
-            comb(depth+1, i+1);
+        
+        for(int i=start; i<=n; i++){
+            numArr[depth] = i;
+            comb(depth+1, i);
         }
     }
 }
