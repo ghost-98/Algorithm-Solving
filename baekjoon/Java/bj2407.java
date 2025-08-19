@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
-// 조합 (시간 복잡도)
-// n이 커서 비트 마스킹 불가
-
+// 조합 (시간 복잡도?)
+// n이 커서 비트 마스킹 불가 2^100 순차탐색 안됨
+// 
 public class bj2407 {
     static int[] numArr;
     static boolean[] visited;
@@ -13,7 +13,7 @@ public class bj2407 {
 
         n = sc.nextInt();
         m = sc.nextInt();
-        
+         
         visited = new boolean[n];
         numArr = new int[m];
 
