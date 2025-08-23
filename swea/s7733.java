@@ -3,7 +3,6 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-// bfs 거리
 public class s7733 {
     static int n;
     static int[][] map;
