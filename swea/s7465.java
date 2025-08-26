@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 // 무리 중 가장 작은 번호가 대표자. parent[i] == -1인 대표자 = 무리 개수
-// 기존 코드는 주석 처리 부분 살리고 22행 없고, find와 union 없이 구현했는데 왜 틀린지..
+// 기존 코드는 주석 처리 부분 살리고 22행 없고, find와 union 없이 구현했는데 : 안되는 이유 - 덮어 씌워질 수 있음
 public class s7465 {
     static int[] parent;
     public static void main(String[] args) {
