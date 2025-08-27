@@ -6,7 +6,7 @@ import java.util.Scanner;
 // 수학 - 루트, 제곱
 // sort, comparator
 // 실수 자릿수 표현 - printf
-public class bj4386팁 {
+public class bj4386크루스칼과배운점 {
     static int[] parent;
     static List<double[]> star;
     static List<double[]> edge; // int, int, double 담는 클래스 만드는게 더 안전

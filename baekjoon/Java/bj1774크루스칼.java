@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-public class bj1774{
+public class bj1774크루스칼{
     static int[] parent;
     static int[][] pos;
     static List<double[]> edge;

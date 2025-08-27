@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 // 12m
 // 크루스칼 가중치 낮은 것부터 + unionFind
-public class bj6497 {
+public class bj6497크루스칼 {
     static int[] parent;
     static int[][] edge;
     public static void main(String[] args) throws IOException {
