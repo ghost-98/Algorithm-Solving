@@ -1,0 +1,102 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+class Solution_5656_정유찬 {
+    static int n, w, h;
+    static int totalWalls;
+    static int[] dy = {-1, 0, 1, 0};
+    static int[] dx = {0, 1, 0, -1};
+
+    public static void main(String[] args)throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int t = Integer.parseInt(br.readLine());
+        for(int tc=1; tc<=t; tc++){
+            st = new StringTokenizer(br.readLine());
+            n = Integer.parseInt(st.nextToken()); // 구슬 쏜 횟수
+            w = Integer.parseInt(st.nextToken()); // 가로
+            h = Integer.parseInt(st.nextToken()); // 세로
+
+            int[][] walls = new int[h][w];
+            totalWalls = 0;
+            for(int r=0; r<h; r++){
+                st = new StringTokenizer(br.readLine());
+                for(int c=0; c<w; c++){
+                    walls[r][c] = Integer.parseInt(st.nextToken());
+                    if(walls[r][c] != 0) totalWalls++;
+                }
+            }
+
+            int maxBroken = dfs(0, walls);
+            System.out.println("#" + tc + " " + (totalWalls - maxBroken));
+        }
+    }
+
+    // DFS 완탐으로 벽돌 수 반환
+    static int dfs(int depth, int[][] map) {
+        if(depth == n) return 0;
+
+        int maxBroken = 0;
+        for(int c=0; c<w; c++) {
+            int r = findWallInMap(map, c);
+            if(r == h) continue; // 벽돌 없음
+
+            int[][] tmpMap = new int[h][w];
+            copyMap(map, tmpMap);
+
+            int broken = bomb(r, c, tmpMap); // 폭발 후 깨진 벽돌 수
+            gravity(tmpMap);
+
+            int total = broken + dfs(depth + 1, tmpMap);
+            if(total > maxBroken) maxBroken = total;
+        }
+        return maxBroken;
+    }
+
+    // 열에서 가장 상단 벽돌 위치 반환
+    static int findWallInMap(int[][] map, int col) {
+        for(int r=0; r<h; r++){
+            if(map[r][col] != 0) return r;
+        }
+        return h;
+    }
+
+    // 폭발 후 깨진 벽돌 수 반환
+    static int bomb(int y, int x, int[][] map) {
+        int size = map[y][x];
+        if(size == 0) return 0;
+
+        map[y][x] = 0;
+        int count = 1;
+
+        for(int i=1; i<size; i++) {
+            for(int j=0; j<4; j++) {
+                int ny = y + dy[j]*i;
+                int nx = x + dx[j]*i;
+                if(ny<0 || nx<0 || ny>=h || nx>=w) continue;
+                count += bomb(ny, nx, map);
+            }
+        }
+        return count;
+    }
+
+    // 중력 적용
+    static void gravity(int[][] map) {
+        for(int c=0; c<w; c++) {
+            int idx = h - 1;
+            for(int r=h-1; r>=0; r--) {
+                if(map[r][c] != 0) map[idx--][c] = map[r][c];
+            }
+            for(int r=idx; r>=0; r--) map[r][c] = 0;
+        }
+    }
+
+    // 2차원 배열 복사
+    static void copyMap(int[][] src, int[][] dest){
+        for(int r=0; r<h; r++)
+            System.arraycopy(src[r], 0, dest[r], 0, w);
+    }
+}

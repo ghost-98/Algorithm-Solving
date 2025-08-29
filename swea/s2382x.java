@@ -28,6 +28,7 @@ public class s2382x {
                 group[i][3] = Integer.parseInt(st.nextToken()); // 1 상 2 하 3 좌 4 우
             }
 
+            // 갱신되는 군집의 개수
             int curK = k;
 
             for(int i=0; i<m; i++){

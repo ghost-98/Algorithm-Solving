@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 // 그리디라고 생각하고 1시간동안 풀었는데,,, 그리디 보장 안돼..
-public class s5656 {
+public class s5656그리디실패 {
     static int n, w, h;
     static int bombedWalls, bombSize, tmpBombSize;
     static int[][] walls;
