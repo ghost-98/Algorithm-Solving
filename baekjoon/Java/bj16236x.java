@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 // 20m
-public class bj16236 {
+public class bj16236x {
     static int n;
     static int sharkSize, sharkFeed;
 
