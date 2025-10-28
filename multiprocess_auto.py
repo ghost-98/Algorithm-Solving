@@ -9,10 +9,10 @@ from selenium.common.exceptions import (
 )
 import time
 
-YOUTUBE_URL = "https://www.youtube.com/watch?v=hsgRuNmOpkQ"
+YOUTUBE_URL = "https://www.youtube.com/watch?v=GGE2zkkSPfo"
 REPEAT_COUNT = 99999  # 각 인스턴스가 반복할 횟수
 VIDEO_DURATION = 40  # 초 단위로 영상 길이
-NUM_PROCESSES = 10  # 동시에 실행할 브라우저 인스턴스 수
+NUM_PROCESSES = 5  # 동시에 실행할 브라우저 인스턴스 수
 
 def create_driver():
     options = webdriver.ChromeOptions()
