@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>감 주문 관리 프로그램</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <h1>🍊 감 주문 관리 대시보드</h1>
+        </header>
+
+        <div id="dashboard" class="dashboard">
+            <div class="summary-item clickable-summary" data-filter="sent_sweet">
+                <p>발송완료 단감</p>
+                <span id="sent-sweet-persimmon">0</span>
+            </div>
+            <div class="summary-item clickable-summary" data-filter="sent_daebong">
+                <p>발송완료 대봉</p>
+                <span id="sent-daebong-persimmon">0</span>
+            </div>
+            <div class="summary-item clickable-summary" data-filter="unsent_total">
+                <p>미발송 주문건수</p>
+                <span id="unsent-orders-count">0</span>
+            </div>
+            <div class="summary-item clickable-summary" data-filter="unsent_sweet">
+                <p>미발송 단감</p>
+                <span id="unsent-sweet-persimmon">0</span>
+            </div>
+            <div class="summary-item clickable-summary" data-filter="unsent_daebong">
+                <p>미발송 대봉</p>
+                <span id="unsent-daebong-persimmon">0</span>
+            </div>
+            <div class="summary-item delayed-summary-red clickable-summary" data-filter="delayed_red">
+                <p><span id="red-threshold-label">7</span>일 이상 지연</p>
+                <span id="delayed-red-count">0</span> 건 / 
+                단감 <span id="delayed-red-sweet">0</span> / 
+                대봉 <span id="delayed-red-daebong">0</span>
+            </div>
+        </div>
+
+        <div class="menu">
+            <button id="new-order-btn">새 주문 추가</button>
+            <input type="text" id="search-input" placeholder="검색...">
+            <div class="file-io">
+                <button id="export-scheduled-btn">발송예정 XLSX 내보내기</button>
+                <label for="import-csv" class="file-btn">CSV 가져오기</label>
+                <input type="file" id="import-csv" accept=".csv" style="display: none;">
+                <button id="export-csv-btn">전체 CSV 내보내기</button>
+            </div>
+        </div>
+
+        <div class="table-area">
+            <div class="legend">
+                <button id="reset-view-btn" title="초기화">🔄</button>
+                <span id="row-count-display" style="margin-left: 10px; font-weight: bold;">총 0건</span>
+                <span class="legend-item">
+                    <span class="color-box urgency-critical"></span>
+                    <input type="number" id="red-threshold" min="1"> 일 이상 지연
+                </span>
+            </div>
+            <div class="order-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th data-sort="orderDate">주문일자</th>
+                            <th data-sort="senderName">보내는 분</th>
+                            <th>보내는 분 연락처</th>
+                            <th>보내는 분 주소</th>
+                            <th>받는 분</th>
+                            <th>받는 분 연락처</th>
+                            <th>받는 분 주소</th>
+                            <th>단감</th>
+                            <th>대봉</th>
+                            <th>특이사항</th>
+                            <th data-sort="status">배송 상태</th>
+                            <th>발송일</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-table-body">
+                        <!-- JS로 채워짐 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="order-form-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="form-title">새 주문</h2>
+            <form id="order-form">
+                <input type="hidden" id="order-id">
+                <div class="form-section">
+                    <h3>보내는 분</h3>
+                    <input type="text" id="sender-name" placeholder="이름" required>
+                    <input type="tel" id="sender-phone" placeholder="전화번호" required>
+                    <input type="text" id="sender-address" placeholder="주소" required>
+                </div>
+                <div class="form-section">
+                    <h3>받는 분</h3>
+                    <input type="text" id="receiver-name" placeholder="이름" required>
+                    <input type="tel" id="receiver-phone" placeholder="전화번호" required>
+                    <input type="text" id="receiver-address" placeholder="주소" required>
+                </div>
+                <div class="form-section">
+                    <h3>주문 내용</h3>
+                    <label for="sweet-persimmon">단감 개수</label>
+                    <input type="number" id="sweet-persimmon" min="0" value="0">
+                    <label for="daebong-persimmon">대봉 개수</label>
+                    <input type="number" id="daebong-persimmon" min="0" value="0">
+                    <label for="order-date">주문일자</label>
+                    <input type="date" id="order-date" required>
+                </div>
+                <div class="form-section">
+                    <h3>특이사항</h3>
+                    <textarea id="notes" placeholder="배송 관련 메모, 고객 요청사항 등"></textarea>
+                </div>
+                <button type="submit" id="form-submit-btn">저장</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
