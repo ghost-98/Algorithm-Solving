@@ -71,6 +71,11 @@ body {
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
+.summary-item.summary-sent {
+    background-color: #e6f7ff;
+    border-left: 5px solid #17a2b8;
+}
+
 .summary-item p {
     margin: 0 0 10px 0;
     color: #495057; /* 레이블 색상 명확하게 */
@@ -102,6 +107,11 @@ body {
     gap: 15px;
 }
 
+.menu-left {
+    display: flex;
+    gap: 8px;
+}
+
 #search-input {
     padding: 12px;
     border: 1px solid #adb5bd;
@@ -110,6 +120,7 @@ body {
     font-size: 16px; /* 입력창 폰트 크기 증가 */
 }
 
+/* 기본 버튼 스타일 */
 button, .file-btn {
     padding: 12px 20px; /* 버튼 크기 증가 */
     border: none;
@@ -119,19 +130,48 @@ button, .file-btn {
     cursor: pointer;
     font-size: 16px;
     font-weight: 500;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
 button:hover, .file-btn:hover {
     background-color: #0056b3;
 }
 
-#export-scheduled-btn {
-    background-color: #28a745; /* 녹색 계열 */
+/* 보조 버튼 (아웃라인 스타일) */
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid;
+    color: #495057;
 }
-#export-scheduled-btn:hover {
-    background-color: #218838;
+
+.btn-secondary:hover {
+    color: white;
 }
+
+/* 보조 버튼 색상 구분 */
+#price-settings-btn.btn-secondary,
+#aggregation-btn.btn-secondary,
+#save-data-btn.btn-secondary,
+label[for="load-data-input"].btn-secondary {
+    border-color: #17a2b8;
+    color: #17a2b8;
+}
+
+#price-settings-btn.btn-secondary:hover,
+#aggregation-btn.btn-secondary:hover,
+#save-data-btn.btn-secondary:hover,
+label[for="load-data-input"].btn-secondary:hover {
+    background-color: #17a2b8;
+}
+
+#export-scheduled-btn.btn-secondary {
+    border-color: #28a745;
+    color: #28a745;
+}
+#export-scheduled-btn.btn-secondary:hover {
+    background-color: #28a745;
+}
+
 
 /* 테이블 영역 (범례와 테이블을 감싸는) */
 .table-area {
@@ -152,6 +192,10 @@ button:hover, .file-btn:hover {
     box-sizing: border-box; /* 패딩과 테두리를 너비에 포함 */
 }
 
+.legend-group-left {
+    display: flex;
+}
+
 #reset-view-btn {
     background: none;
     border: 1px solid #adb5bd;
@@ -159,7 +203,24 @@ button:hover, .file-btn:hover {
     padding: 8px 12px;
     font-size: 20px;
     line-height: 1;
-    margin-right: 10px; /* 아이템과의 간격 */
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#toggle-view-btn {
+    margin-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#row-count-display {
+    font-size: 18px;
+    font-weight: 700;
+    color: #005a9c;
+    background-color: #eaf0ff;
+    padding: 7px 14px;
+    border-radius: 16px;
 }
 
 #reset-view-btn:hover {
@@ -309,4 +370,86 @@ tbody tr.urgency-critical {
     padding: 15px;
     font-size: 18px;
     font-weight: 600;
+}
+
+.form-control-group-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.form-control-group-box label {
+    margin-bottom: 0;
+}
+#payment-status {
+    width: 20px;
+    height: 20px;
+}
+
+/* 보기 모드 스타일 */
+.view-compact .col-detail {
+    display: none;
+}
+
+.view-compact .col-name.clickable-name {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #0056b3;
+    font-weight: 600;
+}
+
+th.col-group-end, td.col-group-end {
+    border-right: 2px solid #9eb2d0;
+}
+
+.payment-status-cell {
+    cursor: pointer;
+    text-align: center !important;
+}
+
+.payment-status {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 50%;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+.payment-status.paid {
+    background-color: #28a745; /* Green */
+}
+
+.payment-status.unpaid {
+    background-color: #dc3545; /* Red */
+}
+
+/* 데이터 집계 모달 */
+.aggregation-controls {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #dee2e6;
+}
+.aggregation-controls label {
+    margin-right: 15px;
+}
+
+#aggregation-results h3 {
+    color: #005a9c;
+    margin-bottom: 10px;
+}
+
+#aggregation-results table {
+    margin-top: 10px;
+}
+
+#aggregation-results tfoot {
+    font-weight: bold;
+    background-color: #e9ecef;
 }
